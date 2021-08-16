@@ -1,0 +1,177 @@
+﻿@using Semester_Fall.Models
+@model   SectionViewModel[,]
+
+@{
+    ViewBag.Title = "Schedule Table";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Schedule Table</h2>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Schedule Table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body style="font-size: 14px;">
+    <div class="container">
+        <div class="timetable-img text-center">
+            <img src="img/content/timetable.png" alt="">
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr class="bg-light-gray">
+                        <th class="text-uppercase">
+                            Time
+                        </th>
+                        <th class="text-uppercase">Sunday</th>
+                        <th class="text-uppercase">Monday</th>
+                        <th class="text-uppercase">Tuesday</th>
+                        <th class="text-uppercase">Wednesday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="align-middle">09:00am-10:30am</td>
+                        @{for (var i = 0; i < 4; i++)
+                            {
+                                if (@Model[0, i] == null)
+                                {
+                                    <td>
+                                        <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="@Model[0,i].CourseColor padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">@Model[0, i].CourseName</span>
+                                        <div class="font-size13 text-black-50">@Model[0, i].ProfName</div>
+                                        <div class="font-size13 text-light-gray">@Model[0, i].HallName</div>
+                                    </td>
+
+                                }
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <td class="align-middle">10:30am-12:00pm</td>
+                        @{for (var i = 0; i < 4; i++)
+                            {
+                                if (@Model[1, i] == null)
+                                {
+                                    <td>
+                                        <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="@Model[1,i].CourseColor padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">@Model[1, i].CourseName</span>
+                                        <div class="font-size13 text-black-50">@Model[1, i].ProfName</div>
+                                        <div class="font-size13 text-light-gray">@Model[1, i].HallName</div>
+                                    </td>
+                                }
+                            }
+                        }
+
+                    </tr>
+
+                    <tr>
+                        <td class="align-middle">12:00pm-1:30am</td>
+                        @{for (var i = 0; i < 4; i++)
+                            {
+                                if (@Model[2, i] == null)
+                                {
+                                    <td>
+                                        <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="@Model[2,i].CourseColor padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">@Model[2, i].CourseName</span>
+                                        <div class="font-size13 text-black-50">@Model[2, i].ProfName</div>
+                                        <div class="font-size13 text-light-gray">@Model[2, i].HallName</div>
+                                    </td>
+                                }
+                            }
+                        }
+                    </tr>
+
+                    <tr>
+                        <td class="align-middle">1:30am-3:00am</td>
+                        @{for (var i = 0; i < 4; i++)
+                            {
+                                if (@Model[3, i] == null)
+                                {
+                                    <td>
+                                        <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="@Model[3,i].CourseColor padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">@Model[3, i].CourseName</span>
+                                        <div class="font-size13 text-black-50">@Model[3, i].ProfName</div>
+                                        <div class="font-size13 text-light-gray">@Model[3, i].HallName</div>
+                                    </td>
+                                }
+                            }
+                        }
+                    </tr>
+
+                    <tr>
+                        <td class="align-middle">3:00am-4:30am</td>
+                        @{for (var i = 0; i < 4; i++)
+                            {
+                                if (@Model[4, i] == null)
+                                {
+                                    <td>
+                                        <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Break</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <span class="@Model[4,i].CourseColor padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">@Model[4, i].CourseName</span>
+                                        <div class="font-size13 text-black-50">@Model[4, i].ProfName</div>
+                                        <div class="font-size13 text-light-gray">@Model[4, i].HallName</div>
+                                    </td>
+                                }
+                            }
+                        }
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container">
+
+                @using (Html.BeginForm("Index", "Section", FormMethod.Get))
+                {
+                    <Button style="font-size:14px;" ID="button1" type="submit" class="btn btn-primary">Back</Button>
+                }
+
+            </div>
+            <div class="container" style="margin-top:10px;">
+                @using (Html.BeginForm("Reset", "Section", FormMethod.Get))
+                {
+                    <Button style="font-size:14px;" ID="reset" type="submit" class="btn btn-primary">Reset the Table</Button>
+                }
+            </div>
+            <div class="container" style="margin-top:10px;">
+                @using (Html.BeginForm("Download", "Section", new { url = HttpContext.Current.Request.Url.AbsoluteUri}, FormMethod.Post))
+                {
+                    <Button style="font-size:14px;" ID="down" type="submit" class="btn btn-primary">Download the Table</Button>
+                }
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

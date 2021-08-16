@@ -1,0 +1,106 @@
+﻿@model Semester_Fall.Models.Sections
+@using Semester_Fall.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Section</h2>
+
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@if (@ViewBag.alert != null)
+{
+    <h3 class="alert-danger">@ViewBag.alert</h3>
+}
+
+
+<br />
+@using (Html.BeginForm("SetWithAdjust", "Section", FormMethod.Post)) { 
+<div class="container">
+    <h3>Course</h3>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.Code, ViewBag.courses as SelectList, "--- Select Your Course ---", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <h3>Timing</h3>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.Timeid, new SelectList(" "), "--- Select Your time ---", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Timeid, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <h3>Professor</h3>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.Profid, new SelectList(" "), "--- Select Your Proff ---", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Profid, "", new { @class = "text-danger" })
+    </div>
+    <br />
+    <h3>Hall</h3>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.Hallid, new SelectList(" "), "--- Select Your Class ---", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Hallid, "", new { @class = "text-danger" })
+    </div>
+    <br />
+
+    <Button ID="Button1" type="submit" class="btn btn-primary">Create</Button>
+</div>
+}
+<br />
+<div class="container">
+    
+    @using (Html.BeginForm("ScheduleTable", "Section", FormMethod.Get))
+    {
+        <Button ID="Button2" type="submit" class="btn btn-primary">View the Schedule Table</Button>
+    }
+</div>
+
+
+
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#Code').change(function () {
+                $.get("@Url.Action("GetValidTime","Section")", function (data) {
+                    $("#Timeid").empty();
+                    var options = '<option value="-1">---Select Your Time---</option>';
+                    for (var i = 0; i < data.Times.length; i++) {
+                        options += '<option value="' + data.Times[i].Timeid + '">' + data.Times[i].Timmingperiod +'</option>';
+                    }
+                    $('#Timeid').append(options);
+                });
+            });
+        });
+        $(function () {
+            $('#Timeid').change(function () {
+                var Code = $("#Code").val();
+                $.get("@Url.Action("GetAppropriateProff", "Section")", {code:Code}, function (data) {
+                    $("#Profid").empty();
+                    var options = '<option value="-1">---Select Your Professor---</option>';
+                    for (var i = 0; i < data.professors.length; i++) {
+                        options += '<option value="' + data.professors[i].Profid + '">' + data.professors[i].Professorname +'</option>';
+                    }
+                    $('#Profid').append(options);
+                });
+            });
+        });;
+        $(function () {
+            $('#Profid').change(function () {
+                $.get("@Url.Action("GetHall", "Section")", function (data) {
+                    $("#Hallid").empty();
+                    var options = '<option value="-1">---Select Your Hall---</option>';
+                    for (var i = 0; i < data.halls.length; i++) {
+                        options += '<option value="' + data.halls[i].Hallid + '">' + data.halls[i].Hallname +'</option>';
+                    }
+                    $('#Hallid').append(options);
+                });
+            });
+        });
+    </script>
+
+}

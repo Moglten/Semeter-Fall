@@ -1,0 +1,55 @@
+﻿@model Semester_Fall.Models.Sections
+
+@{
+    ViewBag.Title = "SetWithAdjust";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+
+<div>
+    <h4>Sections</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Course :
+        </dt>
+
+        <dd>
+            @ViewBag.course
+        </dd>
+
+        <dt>
+            Professor :
+        </dt>
+
+        <dd>
+            @ViewBag.prof
+        </dd>
+
+        <dt>
+            Hall :
+        </dt>
+
+        <dd>
+            @ViewBag.hall
+        </dd>
+
+        <dt>
+            Period :
+        </dt>
+
+        <dd>
+            @ViewBag.period
+        </dd>
+
+    </dl>
+</div>
+<div class="container">
+    @using (Html.BeginForm("Index", "Section", FormMethod.Get))
+    {
+    <Button ID="Button2" type="submit" class="btn btn-primary">Back</Button>
+    }
+</div>
+
